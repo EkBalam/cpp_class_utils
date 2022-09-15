@@ -26,25 +26,40 @@ int TimeControl::tiempoTotalSec(){
     return std::chrono::duration_cast<std::chrono::seconds>(fin - inicio).count();
 }
 
-std::vector<int> VectorUtils::getRandomIntVector(int min, int max, int size){
-    std::vector<int> v = {1, 2};
-    return v;
-}
 
-std::vector<float> VectorUtils::getRandomFloatVector(float min, float max, int size){
-    std::vector<float> v = {1.2, 2.2};
+std::vector<int> VectorUtils::getRandomIntVector(int min, int max, int size){
+    std::vector<int> v;
+    int offset = min;
+    int rango = max - min;
+
+    
+    for(int i=0; i<size; i++){
+        int r = this->rand_number(offset, rango);
+        v.push_back(r);
+    }
     return v;
 }
 
 std::vector<double> VectorUtils::getRandomDoubleVector(double min, double max, int size){
-    std::vector<double> v = {1.2, 2.2};
+    std::vector<double> v;
+    double offset = min;
+    double rango = max - min;
+
+    srand(time(NULL));
+    for(int i=0; i<size; i++){
+        double r = this->rand_number(offset, rango);
+        v.push_back(r);
+    }
     return v;
 }
 
-// template <typename T>
-// void print_vector(std::vector<T> &v){
-//     for(T value : v){
-//         std::cout << value << " - ";
-//     }
-// }
-
+int VectorUtils::rand_number(int offset, int rango){
+    
+    return rand() % rango + offset;
+}
+double VectorUtils::rand_number(double offset, double rango){
+    
+    return static_cast<double>(
+            offset + static_cast<double>(rand()) * static_cast<double>(rango) / RAND_MAX
+            );
+}

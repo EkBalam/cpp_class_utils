@@ -4,6 +4,8 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <cstdlib>
+#include <time.h>
 
 class TimeControl{
         std::chrono::steady_clock::time_point inicio;
@@ -19,14 +21,13 @@ class TimeControl{
 
 class VectorUtils{
     public:
+        VectorUtils(){
+            srand(time(0));
+        }
         std::vector<int> getRandomIntVector(int min, int max, int size);
-        std::vector<float> getRandomFloatVector(float min, float max, int size);
         std::vector<double> getRandomDoubleVector(double min, double max, int size);
-        
-        
+        int rand_number(int offset, int rango);
+        double rand_number(double offset, double rango);
 };
-
-// template <typename T>
-// void print_vector(std::vector<T> &v);
 
 #endif
